@@ -19,10 +19,8 @@ from datetime import datetime
 
 
 DATABASE = '/var/tmp/sharms-homepage-cache.sqlite'
-DEBUG = True
+DEBUG = False
 SECRET_KEY = 'ksd241241kndkndk1ndk123442ievjfiee'
-HOST = '0.0.0.0'
-port = '443'
 
 app = Flask(__name__)
 print app
@@ -159,5 +157,5 @@ def index():
     return render_template('index.html', results = results)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=443)
+    app.run()
 
