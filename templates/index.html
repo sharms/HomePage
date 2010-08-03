@@ -1,1 +1,43 @@
-Big huge tes
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Steven Harms</title>
+		<link rel="stylesheet" href="http://www.sharms.org/static/reset.css" /> 
+		<link rel="stylesheet" href="http://www.sharms.org/static/text.css" /> 
+		<link rel="stylesheet" href="http://www.sharms.org/static/960.css" /> 
+		<link rel="stylesheet" href="http://www.sharms.org/static/sharms.css" />
+	</head>
+	<body>
+		<div class="container_12">
+			<div class="grid_12" id="header">
+				<h1>Steven Harms</h1>
+			</div>
+			<div class="clear"></div>
+			<div class="grid_8" id="rss-updates">
+				<h2>Activities</h2>
+		<ul>
+			{% for result in results %}
+			<li><img src="{{ result.image_url }}" alt="{{ result.source }}" title="{{ result.source }}" class="li-img" /><i style="font-size: 78%;">{{ result.updated|datetimeformat }}</i> {{ result.excerpt }} <a href="{{result.url}}" style="font-size: 78%">more</a></li>
+			{% endfor %}
+		</ul>
+			</div>
+			<div class="grid_4" id="about">
+				<div>
+				<h2>About</h2>
+				<p>Steven Harms (sharms) is a open source hacker, system administrator and programmer.</p>
+				<h2>Resources</h2>
+				<ul id="resources">
+					<li><a href="http://www.sharms.org/blog">Blog</a></li>
+					<li><a href="http://www.github.com/sharms">Github</a></li>
+					<li><a href="http://www.twitter.com/stevenharms">Twitter</a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="grid_12" id="footer">
+				<p>(c) 2010 Steven Harms.  Powered by <a href="http://flash.pocoo.org">Flask</a>.  Icons provided by <a href="http://www.fatcow.com/free-icons/">Fatcow</a></p>
+			</div>
+		</div>
+	</body>
+</html>

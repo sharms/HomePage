@@ -1,2 +1,9 @@
-body         { font-family: 'Georgia', serif; font-size: 15px; color: #000; }
-
+body         { font-family: 'Georgia', serif; font-size: 15px; color: #000; 
+               text-align: left; }
+ul           { margin-left: 0; }
+li           { list-style-type: none; margin-left: 0; }
+.li-img      { vertical-align: text-top; margin-right: 3px; }
+#about       { background-color: #EEE; }
+#about div   { padding: 5px; }
+#footer      { text-align: center; font-size: 70%; font-style: italic; }
+#resources li { list-style-type: square; margin-left: 1em; }
