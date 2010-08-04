@@ -56,6 +56,7 @@ def populate_database():
         load_github()
         load_wordpress()
         load_picasa()
+        load_delicious()
 
 def data_is_stale():
     """Find the last entry in the sqlite database to determine if we need to
@@ -119,6 +120,22 @@ def load_wordpress():
  
     g.db.commit()
     
+def load_delicious():
+    delicious = feedparser.parse("http://feeds.delicious.com/v2/rss/stevenharms?count=10")
+    g.db.cursor().execute('DELETE FROM entries WHERE source = "delicious"')
+
+    for entry in delicious.entries:
+        g.db.cursor().execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                (None, 
+                entry['link'], 
+                "http://www.sharms.org/static/page_white_link.png",
+                entry['title'], 
+                "wordpress", 
+                datetime.strptime(entry['updated'][:-6], '%a, %d %b %Y %H:%M:%S'), 
+                datetime.now()))
+ 
+    g.db.commit()
+ 
 def load_github():
     github = feedparser.parse("http://github.com/sharms.atom")
     g.db.cursor().execute('DELETE FROM entries WHERE source = "github"')
