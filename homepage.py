@@ -23,7 +23,6 @@ DEBUG = False
 SECRET_KEY = 'ksd241241kndkndk1ndk123442ievjfiee'
 
 app = Flask(__name__)
-print app
 app.config.from_object(__name__)
 
 @app.template_filter('datetimeformat')
@@ -37,7 +36,7 @@ def connect_db():
 def init_db():
     """Create the database if it doesn't exist"""
     if not os.path.isfile(app.config['DATABASE']):
-        print "DB disappeared, making a new one"
+        app.logger.debug('DB disappeared, making a new one')
         f = app.open_resource('schema.sql')
         db = connect_db()
         db.cursor().executescript(f.read())
@@ -76,7 +75,6 @@ def load_twitter():
     g.db.cursor().execute('DELETE FROM entries WHERE source = "twitter"')
 
     for entry in twitter.entries:
-        print entry
         g.db.cursor().execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?)', 
                 (None, 
                 entry['link'], 
@@ -93,7 +91,6 @@ def load_picasa():
     g.db.cursor().execute('DELETE FROM entries WHERE source = "picasa"')
 
     for entry in picasa.entries:
-        print entry
         g.db.cursor().execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?)', 
                 (None, 
                 entry['link'], 
@@ -111,7 +108,6 @@ def load_wordpress():
     g.db.cursor().execute('DELETE FROM entries WHERE source = "wordpress"')
 
     for entry in wordpress.entries:
-        print entry
         g.db.cursor().execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?)', 
                 (None, 
                 entry['link'], 
@@ -128,7 +124,6 @@ def load_github():
     g.db.cursor().execute('DELETE FROM entries WHERE source = "github"')
 
     for entry in github.entries:
-        print entry
         g.db.cursor().execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?)', 
                 (None, 
                 entry['link'], 
